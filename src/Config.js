@@ -72,7 +72,7 @@ class Config {
   }
 
   getCheck( name ){
-    if (!this.has(name)) throw new ConfigError(`No config property "${name}"`)
+    if (!this.has(name)) throw new ConfigException(`No config property "${name}"`)
     return this.get(name)
   }
 
@@ -90,7 +90,7 @@ class Config {
   setEnv( env ){
     if ( ! env ) env = process.env.NODE_ENV
     if ( ! env ) env = 'development'
-    if ( ! /^\w+$/.test(env) ) throw new ConfigError(`env includes non alpha chars [${env}]`)
+    if ( ! /^\w+$/.test(env) ) throw new ConfigException(`env includes non alpha chars [${env}]`)
     return this.set('env', env)
   }
 

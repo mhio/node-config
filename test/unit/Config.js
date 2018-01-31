@@ -45,6 +45,19 @@ describe('unit::mh::Config', function(){
       expect( config.get('env') ).to.equal( 'test' )
     })
 
+    it('should find an existing property', function(){
+      expect( config.has('env') ).to.be.true
+    })
+    it('should not find a non existant property', function(){
+      expect( config.has('enva') ).to.be.false
+    })
+    it('should getCheck a property', function(){
+      expect( config.getCheck('env') ).to.equal( 'test' )
+    })
+    it('should error when getCheck against a non existant property', function(){
+      let fn = ()=> config.getCheck('enva') 
+      expect( fn ).to.throw(/No config property/)
+    })
     it('should load a file and overide defaults', async function(){
       let config_path = path.resolve(__dirname,'..','fixture','config.json')
       config.loadFile(config_path)
