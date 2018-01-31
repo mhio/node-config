@@ -74,7 +74,7 @@ describe('unit::mh::Config', function(){
       expect( config.get('name') ).to.equal('exby')
     })
 
-    it('should conver instance to JSON', function(){
+    it('should return an object for toJSON', function(){
       expect( config.toJSON() ).to.eql({
         path: "/Users/matt/clones/mh/config",
         env:"test",
