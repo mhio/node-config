@@ -1,6 +1,6 @@
 {
   "name": "@mhp/config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JSON Config",
   "main": "src/index.js",
   "repository": "https://github.com/mh/node-config",
