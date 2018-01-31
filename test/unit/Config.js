@@ -58,20 +58,41 @@ describe('unit::mh::Config', function(){
       let fn = ()=> config.getCheck('enva') 
       expect( fn ).to.throw(/No config property/)
     })
-    it('should load a file and overide defaults', async function(){
+    it('should load a file and overide defaults', function(){
       let config_path = path.resolve(__dirname,'..','fixture','config.json')
       config.loadFile(config_path)
       expect( config.get('app.port.http') ).to.equal( 5152 )
     })
 
-    it('should set the name to default for a config', async function(){
+    it('should set the name to default for a config', function(){
       expect( config.setName() ).to.be.ok
       expect( config.get('name') ).to.equal('default')
     })
-    it('should set the name to exby for a config', async function(){
+
+    it('should set the name to exby for a config', function(){
       expect( config.setName('exby') ).to.be.ok
       expect( config.get('name') ).to.equal('exby')
     })
+
+    it('should conver instance to JSON', function(){
+      expect( config.toJSON() ).to.eql({
+        path: "/Users/matt/clones/mh/config",
+        env:"test",
+        name:"Forms",
+        app: {
+          port:{
+            http:5151
+          }
+        },
+        db:{
+          database:"forms",
+          username: "dev",
+          password: "dev",
+          dialect: "mysql"
+        }
+      })
+    })
+
   })
 
   describe('templating', function(){

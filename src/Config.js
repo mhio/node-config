@@ -103,7 +103,7 @@ class Config {
   }
 
   toJSON(){
-    return JSON.stringify(this._config)
+    return this._config
   }
 
 }
