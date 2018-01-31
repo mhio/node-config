@@ -9,11 +9,28 @@ describe('unit::mh::Config', function(){
  
   describe('instance', function(){
   
-  let config = null
+    let config = null
 
     beforeEach(function(){
-      config = new Config()    
+      config = new Config({
+        path: [ __dirname, '..', '..' ], // base path for the app
+        defaults: {
+          name: 'Forms',
+          app: {
+            port: {
+              http: 5151
+            }
+          },
+          db: {
+            database: 'forms',
+            username: 'dev',
+            password: 'dev',
+            dialect: 'mysql',
+          }
+        }
+      })
     })
+
     it('should get a config item', function(){
       expect( config.get('app.port.http') ).to.equal( 5151 )
     })

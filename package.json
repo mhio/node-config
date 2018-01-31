@@ -2,7 +2,7 @@
   "name": "@mhp/config",
   "version": "0.0.1",
   "description": "JSON Config",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/mh/node-config",
   "author": "MH",
   "license": "MIT",
