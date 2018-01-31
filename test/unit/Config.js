@@ -64,6 +64,14 @@ describe('unit::mh::Config', function(){
       expect( config.get('app.port.http') ).to.equal( 5152 )
     })
 
+    it('should set the name to default for a config', async function(){
+      expect( config.setName() ).to.be.ok
+      expect( config.get('name') ).to.equal('default')
+    })
+    it('should set the name to exby for a config', async function(){
+      expect( config.setName('exby') ).to.be.ok
+      expect( config.get('name') ).to.equal('exby')
+    })
   })
 
   describe('templating', function(){

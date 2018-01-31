@@ -80,7 +80,8 @@ class Config {
     return has(this._config, name)
   }
 
-  // Env defaults to `NODE_ENV` or else `development`
+  // Set the name/label for this config instance.
+  // The default name is `default`
   setName( config_name ){
     if ( config_name === undefined ) config_name = 'default'
     return this.set('name', config_name)
