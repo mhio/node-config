@@ -73,6 +73,35 @@ describe('unit::mh::Config', function(){
       expect( config.setName('exby') ).to.be.ok
       expect( config.get('name') ).to.equal('exby')
     })
+  
+    it('should set a base path from string', function(){
+      expect( config.setPath( __dirname ) ).to.be.ok
+    })
+
+    it('should set a base path from array', function(){
+      expect( config.setPath( __dirname.split(path.sep)) ).to.be.ok
+    })
+
+    it('should setEnv from a param', function(){
+      expect( config.setEnv('whatever') ).to.be.ok
+      expect( config.get('env') ).to.equal('whatever')
+    })
+
+    describe('messing with NODE_ENV', function(){
+ 
+      let pre_node_env = process.env.NODE_ENV
+
+      before(function(){
+        delete process.env.NODE_ENV
+      })
+      after(function(){
+        process.env.NODE_ENV = pre_node_env
+      })
+      it('should setEnv when NODE_ENV is development', function(){
+        expect( config.setEnv() ).to.be.ok
+        expect( config.get('env') ).to.equal('development')
+      })
+   })
 
     it('should return an object for toJSON', function(){
       expect( config.toJSON() ).to.eql({
