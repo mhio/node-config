@@ -1,5 +1,5 @@
 /* global expect */
-const { Config } = require('../../src/Config')
+const { Config, ConfigException } = require('../../src/Config')
 const path = require('path')
 
 describe('unit::mh::Config', function(){
@@ -87,6 +87,11 @@ describe('unit::mh::Config', function(){
       expect( config.get('env') ).to.equal('whatever')
     })
 
+    it('should error when setEnv to funny chars', function(){
+      let fn = () => config.setEnv('whati %@# $#@ ever')
+      expect( fn ).to.throw(ConfigException, /non alpha numeric characters/)
+    })
+
     describe('messing with NODE_ENV', function(){
  
       let pre_node_env = process.env.NODE_ENV
@@ -101,7 +106,7 @@ describe('unit::mh::Config', function(){
         expect( config.setEnv() ).to.be.ok
         expect( config.get('env') ).to.equal('development')
       })
-   })
+    })
 
     it('should return an object for toJSON', function(){
       expect( config.toJSON() ).to.eql({

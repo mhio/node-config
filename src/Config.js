@@ -91,7 +91,7 @@ class Config {
   setEnv( env ){
     if ( ! env ) env = process.env.NODE_ENV
     if ( ! env ) env = 'development'
-    if ( ! /^\w+$/.test(env) ) throw new ConfigException(`env includes non alpha chars [${env}]`)
+    if ( ! /^\w+$/.test(env) ) throw new ConfigException(`env includes non alpha numeric characters [${env}]`)
     return this.set('env', env)
   }
 
