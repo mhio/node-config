@@ -1,0 +1,14 @@
+{
+  "name": "Formsf",
+  "app": {
+    "port": {
+      "http": 5152
+    }
+  },
+  "db": {
+    "database": "formsf",
+    "username": "devf",
+    "password": "devf",
+    "dialect": "mysqlf"
+  }
+}

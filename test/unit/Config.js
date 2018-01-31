@@ -1,5 +1,6 @@
 /* global expect */
 const { Config } = require('../../src/Config')
+const path = require('path')
 
 describe('unit::mh::Config', function(){
 
@@ -43,6 +44,16 @@ describe('unit::mh::Config', function(){
     it('should get an environment of test', function(){
       expect( config.get('env') ).to.equal( 'test' )
     })
+
+    it('should load a file and overide defaults', async function(){
+      let config_path = path.resolve(__dirname,'..','fixture','config.json')
+      config.loadFile(config_path)
+      expect( config.get('app.port.http') ).to.equal( 5152 )
+    })
+
+  })
+
+  describe('templating', function(){
 
     it('should replace {{a}} template strings', function(){
       expect( Config.templateString('a{{a}}b', {a:'1'}) ).to.equal('a1b')

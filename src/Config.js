@@ -38,9 +38,11 @@ class Config {
 
   loadFile( file ){
     debug('Loading configfrom file "%s"', file)
-    this._loaded_config = fs.readFileSync(file)
+    let file_data = fs.readFileSync(file)
+    let json = JSON.parse(file_data)
+    this._loaded_config = json
     debug('Merging file config', this._loaded_config)
-    this._config = this.assign(this._loaded_config)
+    this._config = assign(this._loaded_config)
   }
 
   defaultConfig( config ){
