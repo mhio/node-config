@@ -7,6 +7,10 @@ const has = require('lodash.has')
 const assign = require('lodash.assign')
 const { Exception } = require('@mhp/exception')
 
+// Assumes first level `node_modules/@mh/config/src`
+const default_path = path.join(__dirname, '..', '..', '..', '..')
+
+// Base error for and config problems
 class ConfigException extends Exception {}
 
 // # Config
@@ -30,10 +34,19 @@ class Config {
     this._default_config = {}
     this._loaded_config = {}
     this._name = options.name || 'default'
-    this.setPath(options.path || __dirname)
+    
+    // Use configs for base path if needed
+    if ( options.configs ){
+      this.setConfigPath(options.configs)
+      if ( !options.path ) this.setPath(options.configs, '..')
+      else this.setPath(options.path)
+    } else {
+      if ( !options.path ) this.setPath(default_path)
+      else this.setPath(options.path)
+    }
     this.setEnv(options.env)
     this.defaultConfig(options.defaults)
-    if (options.file) this.loadFile(options.file)
+    if ( options.file ) this.loadFile(options.file)
   }
 
   loadFile( file ){
@@ -46,7 +59,6 @@ class Config {
   }
 
   defaultConfig( config ){
-    if ( ! config ) return
     this._default_config = config
     this.assignConfig(this._default_config)
   }
@@ -91,19 +103,36 @@ class Config {
   setEnv( env ){
     if ( ! env ) env = process.env.NODE_ENV
     if ( ! env ) env = 'development'
-    if ( ! /^\w+$/.test(env) ) throw new ConfigException(`env includes non alpha numeric characters [${env}]`)
+    if ( ! /^\w+$/.test(env) ) {
+      throw new ConfigException(`env includes non alpha numeric characters [${env}]`)
+    }
     return this.set('env', env)
   }
 
   setPath( dirs ){
-    if ( ! Array.isArray(dirs) ) dirs = Array(dirs)
-    let base_path = path.resolve( path.join(...dirs) )
+    let base_path = Config.argToPath(dirs)
     debug('set base path to', base_path)
     return this.set('path', base_path)
   }
 
+  setConfigPath( dirs ){
+    let config_path = Config.argToPath(dirs)
+    debug('set base path to', config_path)
+    return this.set('config_path', config_path)
+  }
+
   toJSON(){
     return this._config
+  }
+
+  static argToPath( ...dirs ){
+    if ( dirs[0] === undefined || dirs[0] === null ) {
+      throw new ConfigException(`Directories required to convert to path, got "${dirs}"`)
+    }
+    if ( Array.isArray(dirs[0]) ) dirs = dirs[0]
+    let joined_path = path.join(...dirs)
+    let resolved_path = path.resolve(joined_path)
+    return resolved_path
   }
 
 }

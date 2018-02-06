@@ -15,6 +15,7 @@ describe('unit::mh::Config', function(){
     beforeEach(function(){
       config = new Config({
         path: [ __dirname, '..', '..' ], // base path for the app
+        configs: [ __dirname, '..', 'fixture' ],
         defaults: {
           name: 'Forms',
           app: {
@@ -82,6 +83,14 @@ describe('unit::mh::Config', function(){
       expect( config.setPath( __dirname.split(path.sep)) ).to.be.ok
     })
 
+    it('should set a config path from string', function(){
+      expect( config.setConfigPath( __dirname ) ).to.be.ok
+    })
+
+    it('should set a config path from array', function(){
+      expect( config.setConfigPath( __dirname.split(path.sep)) ).to.be.ok
+    })
+
     it('should setEnv from a param', function(){
       expect( config.setEnv('whatever') ).to.be.ok
       expect( config.get('env') ).to.equal('whatever')
@@ -110,23 +119,57 @@ describe('unit::mh::Config', function(){
 
     it('should return an object for toJSON', function(){
       expect( config.toJSON() ).to.eql({
-        path: "/Users/matt/clones/mh/config",
-        env:"test",
-        name:"Forms",
+        path: path.resolve(__dirname,'..','..'),
+        config_path: path.resolve(__dirname,'..','fixture'),
+        env:  'test',
+        name: 'Forms',
         app: {
           port:{
             http:5151
           }
         },
         db:{
-          database:"forms",
-          username: "dev",
-          password: "dev",
-          dialect: "mysql"
+          database: 'forms',
+          username: 'dev',
+          password: 'dev',
+          dialect:  'mysql'
         }
       })
     })
 
+    it('should create an instance without configs', function(){
+      config = new Config({
+        path: [ __dirname ], // base path for the app
+        defaults: {
+          name: 'Forms',
+        }
+      })
+      expect( config.get('path') ).to.equal(__dirname)
+    })
+
+    it('should create an instance without path', function(){
+      config = new Config({
+        configs: [ __dirname ], // base path for the app
+        defaults: {
+          name: 'Forms',
+        }
+      })
+      expect( config.get('path') ).to.equal(__dirname)
+    })
+
+  })
+
+  describe('argToPath', function(){
+    it('should', function(){
+      expect( Config.argToPath('/a') ).to.equal('/a')
+    })
+    it('should', function(){
+      expect( Config.argToPath(['/a']) ).to.equal('/a')
+    })
+    it('should', function(){
+      let fn = ()=> Config.argToPath()
+      expect( fn ).to.throw(/required to convert to path/)
+    })
   })
 
   describe('templating', function(){

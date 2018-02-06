@@ -1,5 +1,5 @@
 /* global expect */
-const { Config, ConfigException } = require('../../')
+const { Config, ConfigException, Exception } = require('../../')
 
 describe('unit::mh::Config::module', function(){
 
@@ -11,4 +11,8 @@ describe('unit::mh::Config::module', function(){
     expect( ConfigException ).to.be.ok
   })
  
+  it('should import a Exception', function(){
+    expect( Exception ).to.be.ok
+  })
+
 })
