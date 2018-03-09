@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@mhp/exception@^0.1.2":
-  version "0.1.2"
-  resolved "http://10.8.8.8:4873/@mhp%2fexception/-/exception-0.1.2.tgz#ab00bfbdf31b625d7aed980ee75c6aa88c0ddd51"
+"@mhio/exception@^0.1.2":
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/@mhio/exception/-/exception-0.1.5.tgz#5fb3207a139bdb2e07e851be996060fca0d27600"
 
 assertion-error@^1.0.1:
   version "1.1.0"

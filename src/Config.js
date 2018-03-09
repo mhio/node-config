@@ -5,7 +5,7 @@ const get = require('lodash.get')
 const set = require('lodash.set')
 const has = require('lodash.has')
 const assign = require('lodash.assign')
-const { Exception } = require('@mhp/exception')
+const { Exception } = require('@mhio/exception')
 
 // Assumes first level `node_modules/@mh/config/src`
 const default_path = path.join(__dirname, '..', '..', '..', '..')
