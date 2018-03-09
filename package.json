@@ -1,9 +1,9 @@
 {
-  "name": "@mhp/config",
+  "name": "@mhio/config",
   "version": "0.2.0",
   "description": "JSON Config",
   "main": "src/index.js",
-  "repository": "https://github.com/mh/node-config",
+  "repository": "https://github.com/mhio/node-config",
   "author": "MH",
   "license": "MIT",
   "private": false,
@@ -29,7 +29,7 @@
     "source-map-support": "^0.5.0"
   },
   "dependencies": {
-    "@mhp/exception": "^0.1.2",
+    "@mhio/exception": "^0.1.2",
     "bluebird": "^3.5.1",
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2",
