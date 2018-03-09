@@ -1,6 +1,6 @@
 {
   "name": "@mhio/config",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "JSON Config",
   "main": "src/index.js",
   "repository": "https://github.com/mhio/node-config",
