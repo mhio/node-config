@@ -20,8 +20,7 @@
     "test:watch": "nodemon -x mocha test/unit test/int",
     "watch": "nodemon -x",
     "release:test": "set -uex; yarn test; npm version prerelease; npm publish --access public --tag testing",
-    "release:patch2": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish --access restricted; git push --tags",
-    "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; npm publish --access public;"
+    "release:patch": "set -uex; git pull; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish --access restricted; git push --tags"
   },
   "devDependencies": {
     "chai": "^4.1.2",
