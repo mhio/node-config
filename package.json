@@ -1,6 +1,6 @@
 {
   "name": "@mhio/config",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Config manager for Node apps",
   "main": "src/index.js",
   "repository": "https://github.com/mhio/node-config",
